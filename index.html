@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blue Lobster Software</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/BlueLobsterSoftwareLogo.jpg" type="image/jpg">
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -38,9 +39,10 @@
             text-align: center;
         }
 
-        section img {
-            width: 60%;
-            max-width: 600px;
+        section img.office-image {
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 176, 255, 0.6);
         }
@@ -79,6 +81,7 @@
             border-radius: 50%;
             border: 5px solid #00b0ff;
             box-shadow: 0 0 15px rgba(0, 176, 255, 0.8);
+            object-fit: cover; /* Ensures circular images are not stretched */
         }
 
         .team-member p {
@@ -119,6 +122,11 @@
     
     <section>
         <p>Blue Lobster Software is on a mission to defeat the corrupt leadership of Lighthouse Games Studio. Founded in response to the toxic influence of Edward Dennekamp, Neil Jones, and Balockay, our goal is to create innovative software solutions free from the constraints of unethical practices. We are dedicated to building a future of creativity and fairness in the gaming industry, one line of code at a time.</p>
+    </section>
+
+    <!-- Office Image -->
+    <section>
+        <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/blsoffice.jpg" alt="Blue Lobster Software Office" class="office-image">
     </section>
 
     <!-- Team Section -->
