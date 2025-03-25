@@ -13,7 +13,7 @@
             margin: 0;
             padding: 0;
         }
-        
+
         header {
             text-align: center;
             padding: 50px;
@@ -62,6 +62,30 @@
             transform: scale(1.1);
         }
 
+        .team-section {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #00b0ff;
+            box-shadow: 0 0 15px rgba(0, 176, 255, 0.8);
+        }
+
+        .team-member p {
+            color: #aaa;
+            margin-top: 10px;
+        }
+
         .anti-lighthouse {
             background-color: rgba(0, 0, 0, 0.7);
             padding: 40px;
@@ -94,11 +118,29 @@
     </header>
     
     <section>
-        <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/blsoffice.jpg" alt="Blue Lobster Software Office">
-        <p>Blue Lobster Software is dedicated to creating innovative software solutions.</p>
-        <a href="https://github.com/BlueLobsterSoftware/ComedyModPublic" class="button">Check out our Comedy Night Mod Menu</a>
+        <p>Blue Lobster Software is on a mission to defeat the corrupt leadership of Lighthouse Games Studio. Founded in response to the toxic influence of Edward Dennekamp, Neil Jones, and Balockay, our goal is to create innovative software solutions free from the constraints of unethical practices. We are dedicated to building a future of creativity and fairness in the gaming industry, one line of code at a time.</p>
     </section>
-    
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="team-member">
+            <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/dev1.jpg" alt="Developer 1">
+            <p>Developer 1: Lead Developer and mastermind behind our most innovative projects.</p>
+        </div>
+        <div class="team-member">
+            <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/dev2.jpg" alt="Developer 2">
+            <p>Developer 2: Expert in software optimization and creating smooth user experiences.</p>
+        </div>
+        <div class="team-member">
+            <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/dev3.jpg" alt="Developer 3">
+            <p>Developer 3: Focused on backend systems and making sure everything runs like a well-oiled machine.</p>
+        </div>
+        <div class="team-member">
+            <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/dev4.jpg" alt="Developer 4">
+            <p>Developer 4: Creative genius working on the visuals and interactive elements of our projects.</p>
+        </div>
+    </section>
+
     <section class="anti-lighthouse">
         <h2>Against Lighthouse Games Studio</h2>
         <p>We stand against Lighthouse Games Studio and their leadership.</p>
