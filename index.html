@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blue Lobster Software</title>
     <link rel="icon" href="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/BlueLobsterSoftwareLogo.jpg" type="image/jpg">
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #1f2a4b, #4f5b7f); /* Alien-themed gradient */
+            background: linear-gradient(135deg, #1f2a4b, #4f5b7f);
             color: #ffffff;
             font-family: 'Orbitron', sans-serif;
             margin: 0;
@@ -24,14 +24,35 @@
             width: 200px;
             height: auto;
             border-radius: 50%;
-            border: 5px solid #00b0ff; /* Blue neon border */
-            box-shadow: 0 0 15px rgba(0, 176, 255, 0.8); /* Glowing effect */
+            border: 5px solid #00b0ff;
+            box-shadow: 0 0 15px rgba(0, 176, 255, 0.8);
+            cursor: pointer;
         }
 
         h1 {
             font-size: 3rem;
             margin-top: 20px;
             text-shadow: 0 0 10px #00b0ff;
+        }
+
+        nav {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #00b0ff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            margin: 0 20px;
+            text-shadow: 0 0 10px rgba(0, 176, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #0088cc;
+            transform: scale(1.1);
         }
 
         section {
@@ -64,6 +85,27 @@
             transform: scale(1.1);
         }
 
+        .owner-profile {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .owner-profile img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 8px solid #00b0ff;
+            box-shadow: 0 0 25px rgba(0, 176, 255, 1);
+            object-fit: cover;
+        }
+
+        .owner-profile h2 {
+            font-size: 2.5rem;
+            color: #00b0ff;
+            text-shadow: 0 0 15px rgba(0, 176, 255, 0.8);
+            margin-top: 20px;
+        }
+
         .team-section {
             display: flex;
             justify-content: center;
@@ -81,12 +123,31 @@
             border-radius: 50%;
             border: 5px solid #00b0ff;
             box-shadow: 0 0 15px rgba(0, 176, 255, 0.8);
-            object-fit: cover; /* Ensures circular images are not stretched */
+            object-fit: cover;
         }
 
         .team-member p {
             color: #aaa;
             margin-top: 10px;
+        }
+
+        .team-title {
+            font-family: 'Exo 2', 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #00b0ff;
+            text-shadow: 0 0 15px rgba(0, 176, 255, 0.8), 0 0 30px rgba(0, 176, 255, 0.5);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 0;
+            padding: 20px 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         .anti-lighthouse {
@@ -99,7 +160,7 @@
 
         .anti-lighthouse h2 {
             font-size: 2.5rem;
-            color: #ff6347; /* Red highlight for contrast */
+            color: #ff6347;
         }
 
         footer {
@@ -112,40 +173,67 @@
             font-size: 1rem;
             color: #aaa;
         }
+
+        audio {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <header>
-        <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/BlueLobsterSoftwareLogo.jpg" alt="Blue Lobster Software Logo">
-        <h1>Welcome to Blue Lobster Software</h1>
+        <a href="index.html"><img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/BlueLobsterSoftwareLogo.jpg" alt="Blue Lobster Software Logo"></a>
+        <h1>Blue Lobster Software</h1>
     </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="links.html">Links</a>
+    </nav>
     
+    <audio id="background-audio" loop>
+        <source src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/ComedyMod%20Vs.%20Ed%20and%20Neil.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
     <section>
         <p>Blue Lobster Software is on a mission to defeat the corrupt leadership of Lighthouse Games Studio. Founded in response to the toxic influence of Edward Dennekamp, Neil Jones, and Balockay, our goal is to create innovative software solutions free from the constraints of unethical practices. We are dedicated to building a future of creativity and fairness in the gaming industry, one line of code at a time.</p>
     </section>
 
-    <!-- Office Image -->
     <section>
         <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/blsoffice.jpg" alt="Blue Lobster Software Office" class="office-image">
+    </section>
+
+    <section>
+        <h2 class="team-title">MEET OUR TEAM OF TALENTED DEVS!</h2>
+    </section>
+
+    <!-- Owner Profile -->
+    <section class="owner-profile">
+        <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/refs/heads/main/images/davidmiller.jpg" alt="Owner">
+        <h2>DAVID MILLER - OWNER</h2>
+    </section>
+
+    <section>
+        <h2 class="team-title">MINIMUM WAGE EMPLOYEES</h2>
     </section>
 
     <!-- Team Section -->
     <section class="team-section">
         <div class="team-member">
-            <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/dev1.jpg" alt="Developer 1">
-            <p>Developer 1: Lead Developer and mastermind behind our most innovative projects.</p>
+            <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/refs/heads/main/images/counter_strike_2_logo_characters.jpg" alt="Quest">
+            <p>QUEST</p>
         </div>
         <div class="team-member">
-            <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/dev2.jpg" alt="Developer 2">
-            <p>Developer 2: Expert in software optimization and creating smooth user experiences.</p>
+            <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/refs/heads/main/images/87729531.png" alt="Developer 2">
+            <p>BHOP BHOP</p>
         </div>
         <div class="team-member">
-            <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/dev3.jpg" alt="Developer 3">
-            <p>Developer 3: Focused on backend systems and making sure everything runs like a well-oiled machine.</p>
+            <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/refs/heads/main/images/81KM0plGIpL._UF1000%2C1000_QL80_.jpg" alt="Developer 3">
+            <p>DDTHEKIDD</p>
         </div>
         <div class="team-member">
-            <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/dev4.jpg" alt="Developer 4">
-            <p>Developer 4: Creative genius working on the visuals and interactive elements of our projects.</p>
+            <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/refs/heads/main/images/1000_F_545726391_J3HaDhtIuLeQn573TuIoAJDmBirJh6lu.jpg" alt="Developer 4">
+            <p>ANONYMOUS GIRL</p>
         </div>
     </section>
 
@@ -156,7 +244,26 @@
     </section>
     
     <footer>
-        <p>&copy; 2025 Blue Lobster Software. All rights reserved.</p>
+        <p>© 2025 Blue Lobster Software. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Function to play audio
+        function playAudio() {
+            const audio = document.getElementById('background-audio');
+            audio.play().catch(error => {
+                console.log("Autoplay blocked: ", error);
+                // Fallback: Try to play after a simulated interaction
+                setTimeout(() => {
+                    const event = new Event('click');
+                    document.body.dispatchEvent(event);
+                    audio.play().catch(err => console.log("Still blocked: ", err));
+                }, 100); // Slight delay to mimic interaction
+            });
+        }
+
+        // Attempt to play audio when the page loads
+        window.addEventListener('load', playAudio);
+    </script>
 </body>
 </html>
