@@ -27,15 +27,27 @@
             border: 5px solid #00b0ff;
             box-shadow: 0 0 15px rgba(0, 176, 255, 0.8);
             cursor: pointer;
-            transition: transform 0.5s ease; /* Smooth transition for spin */
+            transition: transform 0.5s ease;
         }
 
         header img.spin {
-            animation: spin 1s linear; /* Spin animation */
+            animation: spin 1s linear infinite; /* Infinite spin until stopped */
+        }
+
+        header img.crazy-spin {
+            animation: crazySpin 0.5s linear infinite; /* Fast, wild spin */
         }
 
         @keyframes spin {
-            100% { transform: rotate(360deg); } /* Full 360-degree rotation */
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes crazySpin {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) scale(1.1) translate(10px, 10px); }
+            50% { transform: rotate(180deg) scale(0.9) translate(-10px, -10px); }
+            75% { transform: rotate(270deg) scale(1.1) translate(10px, -10px); }
+            100% { transform: rotate(360deg) scale(1) translate(0, 0); }
         }
 
         h1 {
@@ -270,7 +282,7 @@
 </head>
 <body>
     <header>
-        <a href="index.html"><img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/BlueLobsterSoftwareLogo.jpg" alt="Blue Lobster Software Logo" id="logo"></a>
+        <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/BlueLobsterSoftwareLogo.jpg" alt="Blue Lobster Software Logo" id="logo">
         <h1>Blue Lobster Software</h1>
     </header>
 
@@ -351,18 +363,38 @@
             });
         }
 
-        // Spin the logo when clicked
-        document.getElementById('logo').addEventListener('click', function() {
-            this.classList.add('spin');
-            // Remove the spin class after animation ends to allow repeated spins
-            this.addEventListener('animationend', function() {
+        // Logo spin functionality
+        const logo = document.getElementById('logo');
+        let isSpinning = false;
+
+        logo.addEventListener('click', function() {
+            if (isSpinning) {
                 this.classList.remove('spin');
-            }, { once: true });
+                isSpinning = false;
+            } else {
+                this.classList.add('spin');
+                isSpinning = true;
+            }
+        });
+
+        logo.addEventListener('mousedown', function(e) {
+            e.preventDefault(); // Prevent text selection or other default behaviors
+            this.classList.remove('spin');
+            this.classList.add('crazy-spin');
+            isSpinning = false; // Reset normal spin state
+        });
+
+        logo.addEventListener('mouseup', function() {
+            this.classList.remove('crazy-spin');
+        });
+
+        // Also stop crazy spin if mouse leaves the logo while held
+        logo.addEventListener('mouseleave', function() {
+            this.classList.remove('crazy-spin');
         });
 
         // Attempt to play audio when the page loads
         window.addEventListener('load', playAudio);
     </script>
 </body>
-</html>
 </html>
