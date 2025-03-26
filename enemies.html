@@ -218,7 +218,6 @@
                 <p><strong>Aliases:</strong> RotatingRat, XXBB2000XX, RelaxedEgg, BALO, “CHRIS”</p>
                 <p><strong>Birthday:</strong> June 12, 2000</p>
                 <p><strong>Location:</strong> Kitchener, Ontario, Canada</p>
-                <p><strong>Possible Phone Numbers:</strong> 519-404-2448, (519) 741-7364</p>
                 <p>Moderator on the Comedy Night Discord server. Known for wearing a hoodie with the Comedy Night logo microphone.</p>
                 <p><strong>Steam:</strong> <a href="https://steamcommunity.com/profiles/76561198314618505">Profile</a></p>
                 <p><strong>Instagram:</strong> <a href="https://www.instagram.com/balockay_2000">balockay_2000</a></p>
@@ -236,15 +235,14 @@
             <div class="enemy-profile">
                 <h3>Smokedog (Jason Blaine Ellsworth Galvin)</h3>
                 <p><strong>Aliases:</strong> Code420, code_of_the_420</p>
-                <p><strong>Address:</strong> 3744 Bell Rd NE, Salem, Oregon 97301</p>
-                <p><strong>Family:</strong> Jessica Jean Galvin (sister, (503) 409-9863), Jennifer Galvin (sister), Randy Galvin (brother), Caron Jean Galvin Price (mother, 7930 Lockhaven Dr, Keizer OR, (503) 409-9871), Richard Galvin (deceased father), Terrance Price (stepdad, (503) 859-2449)</p>
+                <p><strong>Location:</strong> Salem, Oregon</p>
+                <p><strong>Family:</strong> Jessica Jean Galvin (sister), Jennifer Galvin (sister), Randy Galvin (brother), Caron Jean Galvin Price (mother), Richard Galvin (deceased father), Terrance Price (stepdad)</p>
                 <p><strong>Pets:</strong> Rex (dead dog), Butterscotch (dead dog), Sweet Pea (dead dog)</p>
                 <p>Loves Domino’s pizza and salad.</p>
             </div>
             <div class="enemy-profile">
                 <h3>Acez</h3>
                 <p><strong>Email:</strong> 24kacez@gmail.com</p>
-                <p><strong>Phone:</strong> 402-235-4815 (burner)</p>
                 <p><strong>Discord:</strong> 6kacez (alt: 6kacez_2.0_91799)</p>
                 <p><strong>TikTok:</strong> <a href="https://www.tiktok.com/@6kacez">6kacez</a></p>
                 <p><strong>Schools:</strong> Grassy Lakes Elementary, Chains of Lakes Middle (<a href="https://maps.app.goo.gl/1LDsHLC2V5QFTWke9">Map</a>)</p>
@@ -255,7 +253,7 @@
             <div class="enemy-profile">
                 <h3>SniperED007 (Edward Dennekamp)</h3>
                 <p><strong>Role:</strong> Main developer of Comedy Night</p>
-                <p><strong>Address:</strong> Egham Court, 26-30 Grove Road, Flat 12, Surbiton, United Kingdom, KT6 4DW</p>
+                <p><strong>Location:</strong> Surbiton, United Kingdom</p>
                 <p><strong>Email:</strong> edward.dennekamp@gmail.com</p>
                 <p><strong>Facebook:</strong> <a href="https://www.facebook.com/share/19nNiZWpK5/?mibextid=wwXIfr">Profile</a></p>
                 <p><strong>Birthday:</strong> January 7, 1981</p>
@@ -286,10 +284,11 @@
             </div>
             <div class="enemy-profile">
                 <h3>Marc Rufio Ano</h3>
+                <p><strong>Location:</strong> Las Vegas</p>
                 <p><strong>Twitter:</strong> <a href="https://x.com/iberufio">iberufio</a></p>
                 <p><strong>Instagram:</strong> <a href="https://www.instagram.com/l_rufio_l/">l_rufio_l</a></p>
                 <p><strong>TikTok:</strong> <a href="https://www.tiktok.com/@iberufio">iberufio</a></p>
-                <p><strong>Work:</strong> Sorellina Cucina Italiana, 9742 W Maule Ave Suite 104, Las Vegas</p>
+                <p><strong>Work:</strong> Sorellina Cucina Italiana</p>
             </div>
             <div class="enemy-profile">
                 <h3>Chap_302</h3>
@@ -319,7 +318,8 @@
         const logo = document.getElementById('logo');
         let isSpinning = false;
         let holdInterval;
-        let crazinessLevel = 0.5;
+        let crazinessLevel = 0;
+        let scaleFactor = 1;
 
         logo.addEventListener('click', function(e) {
             e.preventDefault();
@@ -339,14 +339,26 @@
             if (e.button === 0) {
                 this.classList.remove('spin');
                 isSpinning = false;
-                crazinessLevel = 0.5;
+                crazinessLevel = 0;
+                scaleFactor = 1;
                 this.classList.add('crazy-spin');
-                this.style.animation = `crazySpin ${crazinessLevel}s linear infinite`;
+                this.style.animation = `crazySpin 0.5s linear infinite`;
 
                 holdInterval = setInterval(() => {
-                    crazinessLevel = Math.max(0.05, crazinessLevel - 0.05);
-                    this.style.animation = `crazySpin ${crazinessLevel}s linear infinite`;
-                }, 150);
+                    crazinessLevel++;
+                    if (crazinessLevel <= 5000) {
+                        scaleFactor = 1 + (crazinessLevel * 0.001); // Gradually increase scale up to 6x
+                        this.style.transform = `scale(${scaleFactor})`;
+                        this.style.animation = `crazySpin ${Math.max(0.05, 0.5 - (crazinessLevel * 0.00009))}s linear infinite`;
+                    }
+                    if (crazinessLevel === 5000) {
+                        alert("Edward Dennekamp is a NIGGER");
+                        clearInterval(holdInterval);
+                        this.classList.remove('crazy-spin');
+                        this.style.animation = isSpinning ? 'spin 1s linear infinite' : '';
+                        this.style.transform = 'scale(1)';
+                    }
+                }, 10); // Update every 10ms for 5,000 steps
             }
         });
 
@@ -354,12 +366,14 @@
             clearInterval(holdInterval);
             this.classList.remove('crazy-spin');
             this.style.animation = isSpinning ? 'spin 1s linear infinite' : '';
+            this.style.transform = 'scale(1)';
         });
 
         logo.addEventListener('mouseleave', function() {
             clearInterval(holdInterval);
             this.classList.remove('crazy-spin');
             this.style.animation = isSpinning ? 'spin 1s linear infinite' : '';
+            this.style.transform = 'scale(1)';
         });
 
         window.addEventListener('load', playAudio);
