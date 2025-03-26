@@ -13,7 +13,8 @@
             font-family: 'Orbitron', sans-serif;
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* Prevent horizontal scroll from massive logo */
+            overflow-x: hidden;
+            cursor: url('https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/cursor.cur') 16 16, auto; /* Custom .cur cursor */
         }
 
         header {
@@ -205,7 +206,6 @@
             display: none;
         }
 
-        /* Progress Bar Styles */
         #progress-container {
             position: fixed;
             bottom: 10px;
@@ -228,7 +228,6 @@
             transition: width 0.01s linear;
         }
 
-        /* Fullscreen Video Popup */
         .video-popup {
             display: none;
             position: fixed;
@@ -419,25 +418,15 @@
     </div>
 
     <script>
-        function playAudio() {
-            const audio = document.getElementById('background-audio');
-            audio.play().catch(error => {
-                console.log("Autoplay blocked: ", error);
-                setTimeout(() => {
-                    const event = new Event('click');
-                    document.body.dispatchEvent(event);
-                    audio.play().catch(err => console.log("Still blocked: ", err));
-                }, 100);
-            });
-        }
-
         const logo = document.getElementById('logo');
         const progressContainer = document.getElementById('progress-container');
         const progressBar = document.getElementById('progress-bar');
+        const audio = document.getElementById('background-audio');
         let isSpinning = false;
         let holdInterval;
         let crazinessLevel = 0;
         let scaleFactor = 1;
+        let audioStarted = false;
 
         // Create video popup elements dynamically
         const videoPopup = document.createElement('div');
@@ -460,6 +449,20 @@
             video.pause();
             video.currentTime = 0;
         });
+
+        // Play audio on first interaction
+        function startAudio() {
+            if (!audioStarted) {
+                audio.play().then(() => {
+                    audioStarted = true;
+                    document.body.removeEventListener('click', startAudio);
+                }).catch(error => {
+                    console.log("Audio play failed: ", error);
+                });
+            }
+        }
+
+        document.body.addEventListener('click', startAudio);
 
         logo.addEventListener('click', function(e) {
             e.preventDefault();
@@ -523,8 +526,6 @@
             this.style.transform = 'scale(1)';
             progressContainer.style.display = 'none';
         });
-
-        window.addEventListener('load', playAudio);
     </script>
 </body>
 </html>
