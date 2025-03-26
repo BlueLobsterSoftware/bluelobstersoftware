@@ -27,6 +27,15 @@
             border: 5px solid #00b0ff;
             box-shadow: 0 0 15px rgba(0, 176, 255, 0.8);
             cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        header img.spin {
+            animation: spin 1s linear;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
         }
 
         h1 {
@@ -146,7 +155,7 @@
 </head>
 <body>
     <header>
-        <a href="index.html"><img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/BlueLobsterSoftwareLogo.jpg" alt="Blue Lobster Software Logo"></a>
+        <a href="index.html"><img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/BlueLobsterSoftwareLogo.jpg" alt="Blue Lobster Software Logo" id="logo"></a>
         <h1>Blue Lobster Software</h1>
     </header>
 
@@ -167,5 +176,15 @@
     <footer>
         <p>© 2025 Blue Lobster Software. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Spin the logo when clicked
+        document.getElementById('logo').addEventListener('click', function() {
+            this.classList.add('spin');
+            this.addEventListener('animationend', function() {
+                this.classList.remove('spin');
+            }, { once: true });
+        });
+    </script>
 </body>
 </html>
