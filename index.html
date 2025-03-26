@@ -36,8 +36,12 @@
             border-radius: 50%;
             border: 5px solid #00b0ff;
             box-shadow: 0 0 15px rgba(0, 176, 255, 0.8);
-            cursor: pointer;
+            cursor: url('https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/cursor.cur') 16 16, auto; /* Custom cursor on logo */
             transition: transform 0.5s ease, border-color 0.1s ease, box-shadow 0.1s ease;
+        }
+
+        header img:hover {
+            cursor: url('https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/cursor.cur') 16 16, auto; /* Custom cursor on logo hover */
         }
 
         header img.spin {
@@ -269,13 +273,14 @@
             color: #fff;
             font-size: 2rem;
             font-weight: bold;
-            cursor: pointer;
+            cursor: url('https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/cursor.cur') 16 16, auto; /* Custom cursor on close button */
             text-shadow: 0 0 5px #ff0000;
             transition: color 0.3s ease;
         }
 
         .close-btn:hover {
             color: #ff6347;
+            cursor: url('https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/cursor.cur') 16 16, auto; /* Custom cursor on close button hover */
         }
 
         @media (max-width: 768px) {
