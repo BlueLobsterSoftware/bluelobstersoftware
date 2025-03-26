@@ -31,11 +31,23 @@
         }
 
         header img.spin {
-            animation: spin 1s linear;
+            animation: spin 1s linear infinite;
+        }
+
+        header img.crazy-spin {
+            animation: crazySpin 0.5s linear infinite;
         }
 
         @keyframes spin {
             100% { transform: rotate(360deg); }
+        }
+
+        @keyframes crazySpin {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) scale(1.1) translate(10px, 10px); }
+            50% { transform: rotate(180deg) scale(0.9) translate(-10px, -10px); }
+            75% { transform: rotate(270deg) scale(1.1) translate(10px, -10px); }
+            100% { transform: rotate(360deg) scale(1) translate(0, 0); }
         }
 
         h1 {
@@ -155,7 +167,7 @@
 </head>
 <body>
     <header>
-        <a href="index.html"><img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/BlueLobsterSoftwareLogo.jpg" alt="Blue Lobster Software Logo" id="logo"></a>
+        <img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/BlueLobsterSoftwareLogo.jpg" alt="Blue Lobster Software Logo" id="logo">
         <h1>Blue Lobster Software</h1>
     </header>
 
@@ -178,12 +190,33 @@
     </footer>
 
     <script>
-        // Spin the logo when clicked
-        document.getElementById('logo').addEventListener('click', function() {
-            this.classList.add('spin');
-            this.addEventListener('animationend', function() {
+        // Logo spin functionality
+        const logo = document.getElementById('logo');
+        let isSpinning = false;
+
+        logo.addEventListener('click', function() {
+            if (isSpinning) {
                 this.classList.remove('spin');
-            }, { once: true });
+                isSpinning = false;
+            } else {
+                this.classList.add('spin');
+                isSpinning = true;
+            }
+        });
+
+        logo.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            this.classList.remove('spin');
+            this.classList.add('crazy-spin');
+            isSpinning = false;
+        });
+
+        logo.addEventListener('mouseup', function() {
+            this.classList.remove('crazy-spin');
+        });
+
+        logo.addEventListener('mouseleave', function() {
+            this.classList.remove('crazy-spin');
         });
     </script>
 </body>
