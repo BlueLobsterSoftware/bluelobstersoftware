@@ -13,6 +13,7 @@
             font-family: 'Orbitron', sans-serif;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
 
         header {
@@ -44,11 +45,11 @@
 
         @keyframes crazySpin {
             0% { transform: rotate(0deg) scale(1) translate(0, 0); border-color: #00b0ff; box-shadow: 0 0 15px rgba(0, 176, 255, 0.8); }
-            20% { transform: rotate(720deg) scale(2) translate(50px, -50px); border-color: #ff00ff; box-shadow: 0 0 30px #ff00ff; }
-            40% { transform: rotate(1440deg) scale(0.5) translate(-50px, 50px); border-color: #00ff00; box-shadow: 0 0 30px #00ff00; }
-            60% { transform: rotate(2160deg) scale(1.8) translate(50px, 50px); border-color: #ffff00; box-shadow: 0 0 30px #ffff00; }
-            80% { transform: rotate(2880deg) scale(0.7) translate(-50px, -50px); border-color: #ff0000; box-shadow: 0 0 30px #ff0000; }
-            100% { transform: rotate(3600deg) scale(1) translate(0, 0); border-color: #00b0ff; box-shadow: 0 0 15px rgba(0, 176, 255, 0.8); }
+            20% { transform: rotate(1440deg) scale(2) translate(50px, -50px); border-color: #ff00ff; box-shadow: 0 0 30px #ff00ff; }
+            40% { transform: rotate(2880deg) scale(0.5) translate(-50px, 50px); border-color: #00ff00; box-shadow: 0 0 30px #00ff00; }
+            60% { transform: rotate(4320deg) scale(1.8) translate(50px, 50px); border-color: #ffff00; box-shadow: 0 0 30px #ffff00; }
+            80% { transform: rotate(5760deg) scale(0.7) translate(-50px, -50px); border-color: #ff0000; box-shadow: 0 0 30px #ff0000; }
+            100% { transform: rotate(7200deg) scale(1) translate(0, 0); border-color: #00b0ff; box-shadow: 0 0 15px rgba(0, 176, 255, 0.8); }
         }
 
         h1 {
@@ -126,6 +127,28 @@
             color: #aaa;
         }
 
+        #progress-container {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 600px;
+            height: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 176, 255, 0.6);
+            display: none;
+        }
+
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: #00b0ff;
+            border-radius: 10px;
+            transition: width 0.01s linear;
+        }
+
         @media (max-width: 768px) {
             header img {
                 width: 120px;
@@ -181,7 +204,7 @@
         <h2>Useful Links</h2>
         <ul class="links-list">
             <li><a href="https://github.com/BlueLobsterSoftware">GitHub</a></li>
-            <li><a href="https://discord.gg/bluelobstersoftware">Discord</a></li>
+            <li><a href="https://discord.gg/kYrVYsmzPp">Discord</a></li>
         </ul>
     </section>
 
@@ -189,11 +212,18 @@
         <p>© 2025 Blue Lobster Software. All rights reserved.</p>
     </footer>
 
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
     <script>
         const logo = document.getElementById('logo');
+        const progressContainer = document.getElementById('progress-container');
+        const progressBar = document.getElementById('progress-bar');
         let isSpinning = false;
         let holdInterval;
-        let crazinessLevel = 0.5;
+        let crazinessLevel = 0;
+        let scaleFactor = 1;
 
         logo.addEventListener('click', function(e) {
             e.preventDefault();
@@ -213,14 +243,30 @@
             if (e.button === 0) {
                 this.classList.remove('spin');
                 isSpinning = false;
-                crazinessLevel = 0.5;
+                crazinessLevel = 0;
+                scaleFactor = 1;
                 this.classList.add('crazy-spin');
-                this.style.animation = `crazySpin ${crazinessLevel}s linear infinite`;
+                this.style.animation = `crazySpin 0.5s linear infinite`;
+                progressContainer.style.display = 'block';
+                progressBar.style.width = '0%';
 
                 holdInterval = setInterval(() => {
-                    crazinessLevel = Math.max(0.05, crazinessLevel - 0.05);
-                    this.style.animation = `crazySpin ${crazinessLevel}s linear infinite`;
-                }, 150);
+                    crazinessLevel++;
+                    if (crazinessLevel <= 5000) {
+                        scaleFactor = 1 + (crazinessLevel * 0.0098);
+                        this.style.transform = `scale(${scaleFactor})`;
+                        this.style.animation = `crazySpin ${Math.max(0.01, 0.5 - (crazinessLevel * 0.000098))}s linear infinite`;
+                        progressBar.style.width = `${(crazinessLevel / 5000) * 100}%`;
+                    }
+                    if (crazinessLevel === 5000) {
+                        alert("Edward Dennekamp is a NIGGER");
+                        clearInterval(holdInterval);
+                        this.classList.remove('crazy-spin');
+                        this.style.animation = isSpinning ? 'spin 1s linear infinite' : '';
+                        this.style.transform = 'scale(1)';
+                        progressContainer.style.display = 'none';
+                    }
+                }, 10);
             }
         });
 
@@ -228,12 +274,16 @@
             clearInterval(holdInterval);
             this.classList.remove('crazy-spin');
             this.style.animation = isSpinning ? 'spin 1s linear infinite' : '';
+            this.style.transform = 'scale(1)';
+            progressContainer.style.display = 'none';
         });
 
         logo.addEventListener('mouseleave', function() {
             clearInterval(holdInterval);
             this.classList.remove('crazy-spin');
             this.style.animation = isSpinning ? 'spin 1s linear infinite' : '';
+            this.style.transform = 'scale(1)';
+            progressContainer.style.display = 'none';
         });
     </script>
 </body>
