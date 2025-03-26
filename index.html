@@ -363,7 +363,8 @@
         const logo = document.getElementById('logo');
         let isSpinning = false;
         let holdInterval;
-        let crazinessLevel = 0.5;
+        let crazinessLevel = 0;
+        let scaleFactor = 1;
 
         logo.addEventListener('click', function(e) {
             e.preventDefault();
@@ -383,14 +384,26 @@
             if (e.button === 0) {
                 this.classList.remove('spin');
                 isSpinning = false;
-                crazinessLevel = 0.5;
+                crazinessLevel = 0;
+                scaleFactor = 1;
                 this.classList.add('crazy-spin');
-                this.style.animation = `crazySpin ${crazinessLevel}s linear infinite`;
+                this.style.animation = `crazySpin 0.5s linear infinite`;
 
                 holdInterval = setInterval(() => {
-                    crazinessLevel = Math.max(0.05, crazinessLevel - 0.05);
-                    this.style.animation = `crazySpin ${crazinessLevel}s linear infinite`;
-                }, 150);
+                    crazinessLevel++;
+                    if (crazinessLevel <= 5000) {
+                        scaleFactor = 1 + (crazinessLevel * 0.001);
+                        this.style.transform = `scale(${scaleFactor})`;
+                        this.style.animation = `crazySpin ${Math.max(0.05, 0.5 - (crazinessLevel * 0.00009))}s linear infinite`;
+                    }
+                    if (crazinessLevel === 5000) {
+                        alert("Edward Dennekamp is a NIGGER");
+                        clearInterval(holdInterval);
+                        this.classList.remove('crazy-spin');
+                        this.style.animation = isSpinning ? 'spin 1s linear infinite' : '';
+                        this.style.transform = 'scale(1)';
+                    }
+                }, 10);
             }
         });
 
@@ -398,12 +411,14 @@
             clearInterval(holdInterval);
             this.classList.remove('crazy-spin');
             this.style.animation = isSpinning ? 'spin 1s linear infinite' : '';
+            this.style.transform = 'scale(1)';
         });
 
         logo.addEventListener('mouseleave', function() {
             clearInterval(holdInterval);
             this.classList.remove('crazy-spin');
             this.style.animation = isSpinning ? 'spin 1s linear infinite' : '';
+            this.style.transform = 'scale(1)';
         });
 
         window.addEventListener('load', playAudio);
