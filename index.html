@@ -27,6 +27,15 @@
             border: 5px solid #00b0ff;
             box-shadow: 0 0 15px rgba(0, 176, 255, 0.8);
             cursor: pointer;
+            transition: transform 0.5s ease; /* Smooth transition for spin */
+        }
+
+        header img.spin {
+            animation: spin 1s linear; /* Spin animation */
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); } /* Full 360-degree rotation */
         }
 
         h1 {
@@ -261,7 +270,7 @@
 </head>
 <body>
     <header>
-        <a href="index.html"><img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/BlueLobsterSoftwareLogo.jpg" alt="Blue Lobster Software Logo"></a>
+        <a href="index.html"><img src="https://raw.githubusercontent.com/BlueLobsterSoftware/bluelobstersoftware/main/images/BlueLobsterSoftwareLogo.jpg" alt="Blue Lobster Software Logo" id="logo"></a>
         <h1>Blue Lobster Software</h1>
     </header>
 
@@ -318,7 +327,7 @@
         </div>
     </section>
 
-    <section class="anti-lighthouse”>
+    <section class="anti-lighthouse">
         <h2>Against Lighthouse Games Studio</h2>
         <p>We stand against Lighthouse Games Studio and their leadership.</p>
         <p>Fuck Edward Dennekamp and Neil Jones.</p>
@@ -329,6 +338,7 @@
     </footer>
 
     <script>
+        // Function to play audio
         function playAudio() {
             const audio = document.getElementById('background-audio');
             audio.play().catch(error => {
@@ -341,7 +351,18 @@
             });
         }
 
+        // Spin the logo when clicked
+        document.getElementById('logo').addEventListener('click', function() {
+            this.classList.add('spin');
+            // Remove the spin class after animation ends to allow repeated spins
+            this.addEventListener('animationend', function() {
+                this.classList.remove('spin');
+            }, { once: true });
+        });
+
+        // Attempt to play audio when the page loads
         window.addEventListener('load', playAudio);
     </script>
 </body>
+</html>
 </html>
